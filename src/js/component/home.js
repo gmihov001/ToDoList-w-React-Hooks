@@ -2,28 +2,47 @@ import React, { useState, useEffect } from "react";
 
 export const ToDo = props => {
 	const [myList, addToList] = useState([]);
-	useEffect(() => {
+
+	useEffect(
+		() =>
+			fetch(
+				"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist"
+			)
+				.then(response => response.json())
+				.then(data => addToList(data)),
+		[]
+	);
+
+	const sendToApi = () => {
 		fetch(
-			"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist"
+			"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist",
+			{
+				method: "put",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(myList)
+			}
 		)
 			.then(response => response.json())
-			.then(data => addToList(data)),
-			[];
-	});
+			.then(data => addToList(data));
+	};
 
 	return (
 		<div className="text-center mt-5">
 			<h1>My ToDo List</h1>
 			<p>
 				<input
-					type="textarea"
-					onChange={e =>
+					onKeyUp={e =>
 						e.keyCode === 13 &&
-						addToList.concat({ label: e.target.value, done: false })
+						addToList(
+							myList.concat({
+								label: e.target.value,
+								done: false
+							})
+						)
 					}
 				/>
 			</p>
-			<a href="#" className="btn btn-success">
+			<a href="#" className="btn btn-success" onClick={sendToApi}>
 				Click to log entry
 			</a>
 			<div>
