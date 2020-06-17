@@ -15,7 +15,13 @@ export const ToDo = props => {
 		<div className="text-center mt-5">
 			<h1>My ToDo List</h1>
 			<p>
-				<input type="textarea" />
+				<input
+					type="textarea"
+					onChange={e =>
+						e.keyCode === 13 &&
+						addToList.concat({ label: e.target.value, done: false })
+					}
+				/>
 			</p>
 			<a href="#" className="btn btn-success">
 				Click to log entry
