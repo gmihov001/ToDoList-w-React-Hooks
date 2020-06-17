@@ -1,24 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+export const ToDo = props => {
+	const [myList, addToList] = useState([]);
+	useEffect(() => {
+		fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist"
+		)
+			.then(response => response.json())
+			.then(data => addToList(data)),
+			[];
+	});
 
-//create your first component
-export function Home() {
 	return (
 		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
+			<h1>My ToDo List</h1>
 			<p>
-				<img src={rigoImage} />
+				<input type="textarea" />
 			</p>
 			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
+				Click to log entry
 			</a>
+			<div>
+				<ul>
+					{myList.map((task, index) => (
+						<li key={index}>{task.label}</li>
+					))}
+				</ul>
+			</div>
 			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
+				Made by <a href="http://www.4geeksacademy.com">Georgi</a>, with
 				love!
 			</p>
 		</div>
 	);
-}
+};
