@@ -51,9 +51,9 @@ export const ToDo = props => {
 			</button>
 			<div>
 				<ul>
-					{myList.map((task, index) => (
-						<li key={index}>{task.label}</li>
-					))}
+					{myList.map((task, index) => {
+						<li key={index}>{task.label}</li>;
+					})}
 				</ul>
 			</div>
 			<p>
