@@ -13,7 +13,8 @@ export const ToDo = props => {
 		[]
 	);
 
-	const sendToApi = () => {
+	const sendToApi = e => {
+		e.preventDefault;
 		fetch(
 			"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist",
 			{
@@ -42,7 +43,10 @@ export const ToDo = props => {
 					}
 				/>
 			</p>
-			<button className="btn btn-success" onClick={sendToApi}>
+			<button
+				type="text"
+				className="btn btn-success"
+				onClick={e => sendToApi(e)}>
 				Click to log entry
 			</button>
 			<div>
