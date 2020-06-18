@@ -42,9 +42,9 @@ export const ToDo = props => {
 					}
 				/>
 			</p>
-			<a href="#" className="btn btn-success" onClick={sendToApi}>
+			<button className="btn btn-success" onClick={sendToApi}>
 				Click to log entry
-			</a>
+			</button>
 			<div>
 				<ul>
 					{myList.map((task, index) => (
