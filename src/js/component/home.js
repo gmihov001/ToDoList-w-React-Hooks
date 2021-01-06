@@ -3,15 +3,14 @@ import React, { useState, useEffect } from "react";
 export const ToDo = props => {
 	const [myList, addToList] = useState([]);
 
-	useEffect(
-		() =>
-			fetch(
-				"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist"
-			)
-				.then(response => response.json())
-				.then(data => addToList(data)),
-		[]
-	);
+	useEffect(() => {
+		fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist"
+		)
+			.then(response => response.json())
+			.then(data => addToList(data))
+			.catch(err => console.log("There was the following error: ", err));
+	}, []);
 
 	const sendToApi = e => {
 		e.preventDefault;
@@ -26,6 +25,8 @@ export const ToDo = props => {
 			.then(response => response.json())
 			.then(data => addToList(data));
 	};
+
+	console.log(myList);
 
 	return (
 		<div className="text-center mt-5">
