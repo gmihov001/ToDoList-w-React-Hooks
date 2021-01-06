@@ -17,13 +17,24 @@ export const ToDo = props => {
 		fetch(
 			"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist",
 			{
-				method: "put",
+				method: "PUT",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(myList)
 			}
 		)
 			.then(response => response.json())
-			.then(data => setMyList(data));
+			.then(jsonified => {
+				console.log(jsonified);
+				fetch(
+					"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist"
+				)
+					.then(response => response.json())
+					.then(data => setMyList(data))
+					.catch(err =>
+						console.log("There was the following error: ", err)
+					);
+			})
+			.catch(err => console.log("There was the following error: ", err));
 	};
 
 	console.log(myList);
