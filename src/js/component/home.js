@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 export const ToDo = props => {
-	const [myList, addToList] = useState([]);
+	const [myList, setMyList] = useState([]);
 
 	useEffect(() => {
 		fetch(
 			"https://assets.breatheco.de/apis/fake/todos/user/georgi_todolist"
 		)
 			.then(response => response.json())
-			.then(data => addToList(data))
+			.then(data => setMyList(data))
 			.catch(err => console.log("There was the following error: ", err));
 	}, []);
 
@@ -23,7 +23,7 @@ export const ToDo = props => {
 			}
 		)
 			.then(response => response.json())
-			.then(data => addToList(data));
+			.then(data => setMyList(data));
 	};
 
 	console.log(myList);
@@ -35,7 +35,7 @@ export const ToDo = props => {
 				<input
 					onKeyUp={e =>
 						e.keyCode === 13 &&
-						addToList(
+						setMyList(
 							myList.concat({
 								label: e.target.value,
 								done: false
@@ -52,9 +52,9 @@ export const ToDo = props => {
 			</button>
 			<div>
 				<ul>
-					{myList.map((task, index) => {
-						<li key={index}>{task.label}</li>;
-					})}
+					{myList.map((task, index) => (
+						<li key={index}>{task.label}</li>
+					))}
 				</ul>
 			</div>
 			<p>
